@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+mkdir -p /repo
+cd /repo
+
+git clone -b "${IPXE_VERSION:-master}" "https://github.com/ipxe/ipxe"
+
+sed -ie 's/\/\/#define\tIMAGE_COMBOOT/#define\tIMAGE_COMBOOT/' /repo/ipxe/src/config/general.h
+sed -ie 's/\/\/#define\tDOWNLOAD_PROTO_HTTPS/#define\tDOWNLOAD_PROTO_HTTPS/' /repo/ipxe/src/config/general.h
+sed -ie 's/\/\/#define NSLOOKUP_CMD/#define\tNSLOOKUP_CMD/' /repo/ipxe/src/config/general.h
+sed -ie 's/\/\/#define VLAN_CMD/#define\tVLAN_CMD/' /repo/ipxe/src/config/general.h
+sed -ie 's/\/\/#define REBOOT_CMD/#define\tREBOOT_CMD/' /repo/ipxe/src/config/general.h
+sed -ie 's/\/\/#define POWEROFF_CMD/#define\tPOWEROFF_CMD/' /repo/ipxe/src/config/general.h
+sed -ie 's/\/\/#define PING_CMD/#define\tPING_CMD/' /repo/ipxe/src/config/general.h
+
+cd ipxe/src && \
+    make EMBED=/tmp/run.ipxe && \
+    mv "bin/ipxe.iso" "/output/${IPXE_ISO_FILENAME:-ipxe}.iso"

@@ -1,0 +1,5 @@
+#!ipxe
+dhcp
+kernel http://${IPXE_SERVER_ENDPOINT}/assets/linux initrd=initrd.gz initrd=firmware.cpio.gz auto=true priority=critical auto url=http://${IPXE_SERVER_ENDPOINT}/${mac:hexhyp}.cfg
+initrd http://${IPXE_SERVER_ENDPOINT}/assets/initrd.gz
+initrd http://${IPXE_SERVER_ENDPOINT}/assets/firmware.cpio.gz

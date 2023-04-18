@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  ipxe-builder:
+    image: docker.io/virtualdisk/ipxe-cloud-iso-builder:latest
+    platform: linux/amd64
+    environment:
+      - IPXE_SERVER_ENDPOINT=local.ipxe
+      - IPXE_VERSION=master
+      - IPXE_ISO_FILENAME=ipxe
+    volumes:
+      - ./ipxe-script/script.ipxe:/tmp/run.ipxe
+      - ./output:/output
