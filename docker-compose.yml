@@ -8,5 +8,5 @@ services:
       - IPXE_VERSION=master
       - IPXE_ISO_FILENAME=ipxe
     volumes:
-      - ./ipxe-script/script.ipxe:/tmp/run.ipxe
+      - ./script.ipxe:/tmp/run.ipxe
       - ./output:/output
