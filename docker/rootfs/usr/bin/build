@@ -5,14 +5,7 @@ mkdir -p /repo
 cd /repo
 
 git clone -b "${IPXE_VERSION:-master}" "https://github.com/ipxe/ipxe"
-
-sed -ie 's/#undef    IMAGE_COMBOOT/#define    IMAGE_COMBOOT/' /repo/ipxe/src/config/general.h
-sed -ie 's/#undef    DOWNLOAD_PROTO_HTTPS/#define    DOWNLOAD_PROTO_HTTPS/' /repo/ipxe/src/config/general.h
-sed -ie 's/#undef    VLAN_CMD/#define    VLAN_CMD/' /repo/ipxe/src/config/general.h
-sed -ie 's/#undef    NSLOOKUP_CMD/#define    NSLOOKUP_CMD/' /repo/ipxe/src/config/general.h
-sed -ie 's/#undef    REBOOT_CMD/#define    REBOOT_CMD/' /repo/ipxe/src/config/general.h
-sed -ie 's/#undef    POWEROFF_CMD/#define    POWEROFF_CMD/' /repo/ipxe/src/config/general.h
-sed -ie 's/#undef    PING_CMD/#define    PING_CMD/' /repo/ipxe/src/config/general.h
+wget "https://gist.githubusercontent.com/VirtualDisk/6c6872eb5a1cc6774cd4eb9bb082ab3b/raw/e7d8271f18e6053d48a2f971af3684759f443f0c/general.h" --output-document=/repo/ipxe/src/config/general.h
 
 cd ipxe/src && \
     make EMBED=/tmp/run.ipxe && \
